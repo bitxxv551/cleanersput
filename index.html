@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kantin Bersih Nusa Putra</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #ffffff;
+      color: #111;
+    }
+    header {
+      background: #000;
+      color: #fff;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 18px;
+      color: #4caf50;
+    }
+    nav button {
+      background: none;
+      border: none;
+      color: #fff;
+      margin-left: 10px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    nav button:hover {
+      text-decoration: underline;
+    }
+    .container {
+      padding: 16px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .center {
+      text-align: center;
+    }
+    h2 {
+      color: #2e7d32;
+      margin-bottom: 12px;
+    }
+    p {
+      line-height: 1.6;
+    }
+    .btn {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      margin: 5px;
+    }
+    .btn-green {
+      background: #4caf50;
+      color: #fff;
+    }
+    .btn-black {
+      background: #000;
+      color: #fff;
+    }
+    .leaderboard li {
+      list-style: none;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      background: #f1f8e9;
+    }
+    .badge {
+      display: inline-block;
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 6px 12px;
+      border-radius: 999px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+      margin: 20px 0;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Kantin Bersih Nusa Putra</h1>
+  <nav>
+    <button onclick="showPage('home')">Beranda</button>
+    <button onclick="showPage('scan')">Scan</button>
+    <button onclick="showPage('leaderboard')">Leaderboard</button>
+    <button onclick="showPage('profile')">Profil</button>
+    <button onclick="showPage('education')">Edukasi</button>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- BERANDA -->
+  <div id="home" class="card">
+    <div class="center">
+      <h2>Puntung Rokok = Racun Lingkungan</h2>
+      <p>Mahasiswa Nusa Putra, mari jaga kantin kampus tetap bersih dan sehat!</p>
+      <button class="btn btn-green" onclick="showPage('scan')">Scan Sampah Puntung Rokok</button>
+    </div>
+  </div>
+
+  <!-- SCAN -->
+  <div id="scan" class="card hidden">
+    <div class="center">
+      <h2>Scan Foto Puntung Rokok</h2>
+      <p>Unggah atau ambil foto sampah puntung rokok di kantin.</p>
+      <input type="file" accept="image/*" id="photoInput"><br><br>
+      <button class="btn btn-black" onclick="handleScan()">Upload / Ambil Foto</button>
+    </div>
+  </div>
+
+  <!-- LEADERBOARD -->
+  <div id="leaderboard" class="card hidden">
+    <h2>🏆 Leaderboard</h2>
+    <ul class="leaderboard">
+      <li><span>🥇 Mahasiswa A</span><span>320 poin</span></li>
+      <li><span>🥈 Mahasiswa B</span><span>280 poin</span></li>
+      <li><span>🥉 Mahasiswa C</span><span>250 poin</span></li>
+      <li><span>⭐ Kamu</span><span id="userPoints">120 poin</span></li>
+    </ul>
+  </div>
+
+  <!-- PROFIL -->
+  <div id="profile" class="card hidden">
+    <h2>👤 Profil Kamu</h2>
+    <p><strong>Nama:</strong> Anonim / Mahasiswa</p>
+    <p><strong>Total Foto:</strong> <span id="userPhotos">5</span></p>
+    <p><strong>Total Poin:</strong> <span id="profilePoints">120</span></p>
+    <p><strong>Peringkat Saat Ini:</strong> <span id="userRank">#7</span></p>
+
+    <h3>Badge</h3>
+    <div>
+      <span class="badge">🌱 Peduli Lingkungan</span>
+      <span class="badge">🏆 Pahlawan Kantin</span>
+      <span class="badge">💚 Green Hero</span>
+    </div>
+  </div>
+
+  <!-- EDUKASI -->
+  <div id="education" class="card hidden">
+    <h2>🌍 Edukasi Lingkungan</h2>
+    <ul>
+      <li>🚬 Puntung rokok mengandung zat beracun yang mencemari tanah dan air.</li>
+      <li>🐟 Satu puntung dapat mencemari hingga 1000 liter air.</li>
+      <li>🌍 Puntung rokok adalah salah satu sampah paling banyak di dunia.</li>
+    </ul>
+    <div style="margin-top:16px; background:#e8f5e9; padding:12px; border-radius:12px; text-align:center;">
+      <strong>Buang puntung rokok pada asbak yang tersedia demi kantin kampus yang bersih dan sehat!</strong>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Kampanye Lingkungan Kantin Nusa Putra
+</footer>
+
+<script>
+  let points = 120;
+  let photos = 5;
+  let rank = 7;
+
+  function showPage(pageId) {
+    const pages = ['home', 'scan', 'leaderboard', 'profile', 'education'];
+    pages.forEach(id => {
+      document.getElementById(id).classList.add('hidden');
+    });
+    document.getElementById(pageId).classList.remove('hidden');
+  }
+
+  function handleScan() {
+    const input = document.getElementById('photoInput');
+    if (!input.files.length) {
+      alert('Silakan pilih atau ambil foto terlebih dahulu.');
+      return;
+    }
+
+    // Simulasi AI detection
+    photos++;
+    points += 20;
+    rank = Math.max(1, rank - 1);
+
+    document.getElementById('userPoints').textContent = points + ' poin';
+    document.getElementById('profilePoints').textContent = points;
+    document.getElementById('userPhotos').textContent = photos;
+    document.getElementById('userRank').textContent = '#' + rank;
+
+    alert('Puntung rokok terdeteksi! 🌱 Terima kasih telah membantu menjaga lingkungan kampus.');
+
+    showPage('leaderboard');
+  }
+</script>
+
+</body>
+</html>
